@@ -1,0 +1,13 @@
+version: "3.3"
+services:  
+  database:
+    image: package-database
+    build:
+      context: ./database/
+    container_name: package-database
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: packages
+      MYSQL_PASSWORD: whichweresent
+    ports:
+      - "3306:3306"
