@@ -22,7 +22,7 @@ server.use(restify.plugins.bodyParser());
 // get all packages
 server.get('/packages', function (request, response, next) {
     connection.query('select * from packages.offer order by Id desc', function (error, results, fields) {
-        if (error) { next(error); return; }
+        if (error) throw error;
         response.end(JSON.stringify(results));
     });
 });
@@ -31,7 +31,7 @@ server.get('/packages', function (request, response, next) {
 server.post('/packages', function (request, response, next) {
     if(!request.body) { return next(new errors.BadRequestError("texto inválido")); }
     connection.query('insert into packages.offer (Text) values ("?")', [request.body], function (error, results, fields) {
-        if (error) { next(error); return; }
+        if (error) throw error;
         response.end("Ok");
     });
 });
@@ -43,7 +43,7 @@ server.del('/packages/:id', function (request, response, next) {
     if(!id || id <= 0) { return next(new errors.BadRequestError("id inválido")); }
     
     connection.query('delete from packages.offer WHERE Id=?', [id], function (error, results, fields) {
-        if (error) { next(error); return; }
+        if (error) throw error;
         if(!results.affectedRows) { next(new errors.BadRequestError("id inválido")); return; }
         response.end("Ok");
     });

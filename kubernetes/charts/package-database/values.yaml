@@ -1,23 +1,18 @@
 replicaCount: 1
-namespace: default
 image:
   repository: package-database
   tag: latest
-  pullPolicy: Never # in order to run it locally, we must avoid the attempt of connecting to any image registry
+  pullPolicy: Never
 service:
   type: ClusterIP
   port: 3306
 resources:
   limits:
-    cpu: 200m
-    memory: 256Mi
+    cpu: 500m
+    memory: 512Mi
   requests:
-    cpu: 100m
-    memory: 128Mi
+    cpu: 500m
+    memory: 512Mi
 env:
   - name: MYSQL_ROOT_PASSWORD 
     value: root
-  - name: MYSQL_USER
-    value: packages
-  - name: MYSQL_PASSWORD
-    value: whichweresent

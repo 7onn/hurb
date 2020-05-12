@@ -11,11 +11,6 @@ kubectl create ns development && \
 #### databases
 then install the database charts
 ```bash
-helm upgrade -i package-database-pr-1 \
-  --namespace development \
-  --values ./values/package-database/development.yaml \
-  ./charts/package-database
-
 helm upgrade -i package-database-staging \
   --namespace staging \
   --values ./values/package-database/staging.yaml \
@@ -29,20 +24,13 @@ helm upgrade -i package-database-production \
 
 if you need to remove these, run:
 ```bash
-helm del --purge package-database-pr-1
 helm del --purge package-database-staging
 helm del --purge package-database-production
 ```
 
-
 #### servers
 once database container is healthy, install server charts
 ```bash
-helm upgrade -i package-server-pr-1 \
-  --namespace development \
-  --values ./values/package-server/development.yaml \
-  ./charts/package-server
-
 helm upgrade -i package-server-staging \
   --namespace staging \
   --values ./values/package-server/staging.yaml \
@@ -56,7 +44,6 @@ helm upgrade -i package-server-production \
 
 if you need to remove these, run:
 ```bash
-helm del --purge package-server-pr-1
 helm del --purge package-server-staging
 helm del --purge package-server-production
 ```
