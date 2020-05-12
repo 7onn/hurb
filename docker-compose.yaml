@@ -17,11 +17,10 @@ services:
       context: ./server/
     container_name: package-server
     environment:
+      PORT: "3000"
       MYSQL_HOST: "database"
       MYSQL_USER: "root"
       MYSQL_PASSWORD: "root"
-    ports:
-      - "3000:3000"
   ingress:
     image: package-ingress:latest
     depends_on: 

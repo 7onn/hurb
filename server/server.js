@@ -30,7 +30,7 @@ server.get('/packages', function (request, response, next) {
 // create packages
 server.post('/packages', function (request, response, next) {
     if(!request.rawBody) { return next(new errors.BadRequestError("texto inválido")); }
-    connection.query('insert into packages.offer (Text) values ("?")', [request.rawBody], function (error, results, fields) {
+    connection.query('insert into packages.offer (Text) values (?)', [request.rawBody], function (error, results, fields) {
         if (error) throw error;
         response.end("Ok");
     });
