@@ -5,7 +5,7 @@ RUN chmod -R 766 /var/log/nginx && \
   ln -sf /dev/stdout /var/log/nginx/stdout.log && \
   ln -sf /dev/stderr /var/log/nginx/stderr.log 
 
-COPY nginx.conf.template /etc/nginx/nginx.conf.template
+COPY template.nginx.conf /etc/nginx/template.nginx.conf
 COPY entrypoint.sh /
 RUN chmod +x entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
