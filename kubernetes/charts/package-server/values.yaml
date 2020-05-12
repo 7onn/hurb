@@ -1,0 +1,17 @@
+replicaCount: 1
+image:
+  repository: package-server
+  tag: latest
+  pullPolicy: Never # in order to run it locally, we must avoid the attempt of connecting to any image registry
+service:
+  type: ClusterIP
+  port: 3000
+  healthcheck:
+    path: /health
+resources: 
+  limits:
+    cpu: 400m
+    memory: 512Mi
+  requests:
+    cpu: 200m
+    memory: 256Mi

@@ -1,0 +1,26 @@
+replicaCount: 1
+image:
+  repository: package-server
+  tag: latest # this should be the HEAD of some pull request branch
+  pullPolicy: Never # in order to run it locally, we must avoid the attempt of connecting to any image registry
+service:
+  type: ClusterIP
+  port: 3000
+  healthcheck:
+    path: /health
+resources: 
+  limits:
+    cpu: 400m
+    memory: 512Mi
+  requests:
+    cpu: 200m
+    memory: 256Mi
+env:
+  - name: PORT
+    value: "3000"
+  - name: MYSQL_HOST
+    value: "package-database-pr-1.development.svc.cluster.local"
+  - name: MYSQL_USER
+    value: root
+  - name: MYSQL_PASSWORD
+    value: root
