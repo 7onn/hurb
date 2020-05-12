@@ -1,7 +1,7 @@
 version: "3.3"
 services:  
   database:
-    image: package-database
+    image: package-database:latest
     build:
       context: ./database/
     container_name: package-database
