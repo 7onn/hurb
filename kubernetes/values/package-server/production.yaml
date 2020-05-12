@@ -1,8 +1,8 @@
 replicaCount: 1
 image:
   repository: package-server
-  tag: latest
-  pullPolicy: Never # in order to run it locally, we must avoid the attempt of connecting to any image registry
+  tag: latest # this should be the commit SHA of a wishful release
+  pullPolicy: Never
 service:
   type: ClusterIP
   port: 3000

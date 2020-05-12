@@ -2,7 +2,7 @@ replicaCount: 1
 image:
   repository: package-server
   tag: latest # this should be the HEAD of some pull request branch
-  pullPolicy: Never # in order to run it locally, we must avoid the attempt of connecting to any image registry
+  pullPolicy: Never
 service:
   type: ClusterIP
   port: 3000

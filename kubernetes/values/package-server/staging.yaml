@@ -1,8 +1,8 @@
 replicaCount: 1
 image:
   repository: package-server
-  tag: latest
-  pullPolicy: Never # in order to run it locally, we must avoid the attempt of connecting to any image registry
+  tag: latest # this should be the HEAD of master branch
+  pullPolicy: Never
 service:
   type: ClusterIP
   port: 3000
@@ -17,7 +17,7 @@ resources:
     memory: 256Mi
 env:
   - name: PORT
-    value: 3000
+    value: "3000"
   - name: MYSQL_HOST
     value: package-database-staging.staging.svc.cluster.local
   - name: MYSQL_USER
