@@ -1,0 +1,26 @@
+replicaCount: 1
+image:
+  repository: package-server
+  tag: latest # this should be the HEAD of master branch
+  pullPolicy: Never
+service:
+  type: ClusterIP
+  port: 3000
+  healthcheck:
+    path: /health
+resources: 
+  limits:
+    cpu: 400m
+    memory: 512Mi
+  requests:
+    cpu: 200m
+    memory: 256Mi
+env:
+  - name: PORT
+    value: "3000"
+  - name: MYSQL_HOST
+    value: package-database-staging.staging.svc.cluster.local
+  - name: MYSQL_USER
+    value: root
+  - name: MYSQL_PASSWORD
+    value: root

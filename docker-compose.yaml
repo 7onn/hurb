@@ -7,7 +7,16 @@ services:
     container_name: package-database
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_USER: packages
-      MYSQL_PASSWORD: whichweresent
     ports:
       - "3306:3306"
+  server:
+    image: package-server:latest
+    build:
+      context: ./server/
+    container_name: package-server
+    environment:
+      MYSQL_HOST: "package-database"
+      MYSQL_USER: "root"
+      MYSQL_PASSWORD: "root"
+    ports:
+      - "3000:3000"
