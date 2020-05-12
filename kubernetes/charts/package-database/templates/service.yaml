@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "package-database.fullname" . }}
+  namespace: {{ .Values.namespace }}
+  labels:
+{{ include "package-database.labels" . | indent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: {{ include "package-database.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}

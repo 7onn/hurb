@@ -1,6 +1,8 @@
-CREATE DATABASE `packages`
+CREATE DATABASE IF NOT EXISTS packages;
 
-CREATE TABLE `offer` (
+USE packages;
+
+CREATE TABLE IF NOT EXISTS offer (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Text` varchar(255) NOT NULL,
   `CreateDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,

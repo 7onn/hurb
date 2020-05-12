@@ -1,0 +1,23 @@
+replicaCount: 1
+namespace: production
+image:
+  repository: package-database
+  tag: latest # this should be the commit SHA of a wishful release
+  pullPolicy: Never # in order to run it locally, we must avoid the attempt of connecting to any image registry
+service:
+  type: ClusterIP
+  port: 3306
+resources:
+  limits:
+    cpu: 400m
+    memory: 512Mi
+  requests:
+    cpu: 200m
+    memory: 256Mi
+env:
+  - name: MYSQL_ROOT_PASSWORD 
+    value: root
+  - name: MYSQL_USER
+    value: packages
+  - name: MYSQL_PASSWORD
+    value: whichweresent
