@@ -1,2 +1,2 @@
 ## database
-This directory stores package-database startup essential files
+this directory stores package-database startup essential files

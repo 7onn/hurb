@@ -1,0 +1,42 @@
+user  nginx;
+worker_processes  1; # dude, this sets the amount of CPU processes nginx will start; 
+# if you let this value 'auto' nginx will consume all of its available (since needed) host CPU.. i.e, a whole cluster node being consumed by it;
+pid        /var/run/nginx.pid;
+
+events {
+  worker_connections 1024;
+}
+
+http {
+  include       /etc/nginx/mime.types;
+  default_type  application/octet-stream;
+
+  log_format main '$remote_addr - $remote_user [$time_local] "$request" '
+                  '$status $body_bytes_sent "$http_referer" '
+                  '"$http_user_agent" "$http_x_forwarded_for"';
+
+  server {
+    listen 80;
+    access_log /var/log/nginx/stdout.log;
+    error_log /var/log/nginx/stderr.log;
+
+    # redirecting root to /packages
+    location = / {
+        return 301 http://$host/packages;  
+    }
+    
+    location ~ ^/packages|/$ {
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+
+        proxy_pass http://${PACKAGE_SERVER_HOST}:${PACKAGE_SERVER_PORT};
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    # redirecting querystrings to /packages
+    location ~ ^/(\?.*)? {
+        return 301 http://$host/packages;
+    }
+  }
+}
