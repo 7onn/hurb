@@ -1,10 +1,12 @@
 # hurb
 this project is meant to accomplish the [delta challenge](https://github.com/hurbcom/challenge-delta)
 
-### orchestrating
+### my setup
+- [docker](https://www.docker.com/get-started) 19.03.5 (633a0ea)
+- [docker-compose](https://docs.docker.com/compose/install/) 1.25.4 (8d51620a)
 - [minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/) v1.10.0 
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) (server) v1.18.1
-- [helm](https://helm.sh/docs/intro/install/)  v2.14.2
+- [helm](https://helm.sh/docs/intro/install/) v2.14.2
 
 ### get started
 ```bash
