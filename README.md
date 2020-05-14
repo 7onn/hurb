@@ -6,23 +6,26 @@ if you do not have minikube installed already, follow [these](https://kubernetes
 - minikube v1.10.0 
 - kubectl (server) v1.18.1
 
-#### ingress, dns, helm
+#### helm, ingress, dns
+if you dont have helm installed, have a look how to [get it](https://helm.sh/docs/intro/install/)
+
 start the local cluster and enable the following addons
 ```bash
 minikube start
-minikube addons enable ingress
+# minikube addons enable ingress
 minikube addons enable ingress-dns
 minikube addons enable helm-tiller
+
 helm init --wait --upgrade
 ```
 append the following command output in your `/etc/hosts`
 ```bash
-echo $(minikube ip) delta
+echo $(minikube ip) minikube
 ```
 e.g:
 ```
 127.0.0.1 localhost
-192.168.64.2 delta
+192.168.64.2 minikube
 ```
 
 #### local registry
