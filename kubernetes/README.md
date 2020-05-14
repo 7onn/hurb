@@ -47,3 +47,17 @@ if you need to remove these, run:
 helm del --purge package-server-staging
 helm del --purge package-server-production
 ```
+
+#### ingress
+until now the server has no access from outside its kube context; we must install an ingress component to handle foreign requests
+```bash
+helm upgrade -i package-ingress-production \
+  --namespace production \
+  --values ./values/package-ingress/production.yaml \
+  ./charts/package-ingress
+```
+
+if you need to remove these, run:
+```bash
+helm del --purge package-ingress-production
+```

@@ -6,17 +6,28 @@ services:
       context: ./database/
     container_name: package-database
     environment:
-      MYSQL_ROOT_PASSWORD: root
-    ports:
-      - "3306:3306"
+      MYSQL_ROOT_PASSWORD: "root"
   server:
     image: package-server:latest
+    depends_on: 
+      - database
     build:
       context: ./server/
     container_name: package-server
     environment:
-      MYSQL_HOST: "package-database"
+      PORT: "3000"
+      MYSQL_HOST: "database"
       MYSQL_USER: "root"
       MYSQL_PASSWORD: "root"
+  ingress:
+    image: package-ingress:latest
+    depends_on: 
+      - server
+    build:
+      context: ./ingress/
+    container_name: package-ingress
+    environment:
+      PACKAGE_SERVER_HOST: "server"
+      PACKAGE_SERVER_PORT: "3000"
     ports:
-      - "3000:3000"
+      - "80:80"
