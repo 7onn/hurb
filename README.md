@@ -29,9 +29,7 @@ run the following command to get all project images ready to be used at your reg
 make artifacts-build
 ```
 
-#### running at docker
-since we are running mysql inside a container, I'll just assume its data might be ephemeral as well;
-to have mysql listening at port 3306 along with nodejs server at 3000, run:
+#### running at docker-compose
 ```bash
 make run
 make list-packages
