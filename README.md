@@ -6,7 +6,7 @@ this project is meant to accomplish the [delta challenge](https://github.com/hur
 - [docker-compose](https://docs.docker.com/compose/install/) 1.25.4 (8d51620a)
 - [minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/) v1.10.0 
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) (server) v1.18.1
-- [helm](https://helm.sh/docs/intro/install/) v2.14.2
+- [helm](https://helm.sh/docs/intro/install/) v2.16.7
 
 ### get started
 ```bash
@@ -41,3 +41,6 @@ make add-package text=myfirstpackage
 
 #### running at kubernetes
 once every image artifact is successfully built, you might follow [this](https://github.com/devbytom/hurb/tree/master/kubernetes) in order to install the application charts
+```bash
+cd ./kubernetes
+```

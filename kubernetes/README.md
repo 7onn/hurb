@@ -1,63 +1,31 @@
 # kubernetes
 
-#### namespaces
+#### namespace
 to firstly setup the cluster, run:
 ```bash
-kubectl create ns development && \
-  kubectl create ns staging && \
-  kubectl create ns production
+make
+make add-namespaces
+#make rm-namespaces
+#"sudo rm -rf /" equivalent commented above
 ```
 
-#### databases
+#### database
 then install the database charts
 ```bash
-helm upgrade -i package-database-staging \
-  --namespace staging \
-  --values ./values/package-database/staging.yaml \
-  ./charts/package-database
-
-helm upgrade -i package-database-production \
-  --namespace production \
-  --values ./values/package-database/production.yaml \
-  ./charts/package-database
+make add-database
+#make rm-database
 ```
 
-if you need to remove these, run:
-```bash
-helm del --purge package-database-staging
-helm del --purge package-database-production
-```
-
-#### servers
+#### server
 once database container is healthy, install server charts
 ```bash
-helm upgrade -i package-server-staging \
-  --namespace staging \
-  --values ./values/package-server/staging.yaml \
-  ./charts/package-server
-
-helm upgrade -i package-server-production \
-  --namespace production \
-  --values ./values/package-server/production.yaml \
-  ./charts/package-server
-```
-
-if you need to remove these, run:
-```bash
-helm del --purge package-server-staging
-helm del --purge package-server-production
+make add-server
+# make rm-server
 ```
 
 #### ingress
-until now the server has no access from outside its kube context; we must install an ingress component to handle foreign requests
+now the nginx service to handle and forward requests to server
 ```bash
-helm upgrade -i package-ingress-production \
-  --namespace production \
-  --values ./values/package-ingress/production.yaml \
-  ./charts/package-ingress
-```
-
-if you need to remove these, run:
-```bash
-helm del --purge package-ingress-production
+make add-yxorp
+#make rm-yxorp
 ```
