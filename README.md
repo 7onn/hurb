@@ -2,23 +2,18 @@
 this project is meant to accomplish the [delta challenge](https://github.com/hurbcom/challenge-delta)
 
 ### orchestrating
-if you do not have minikube installed already, follow [these](https://kubernetes.io/docs/tasks/tools/install-minikube/) instructions to get it running in your machine; my current setup is:
-- minikube v1.10.0 
-- kubectl (server) v1.18.1
+- [minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/) v1.10.0 
+- [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) (server) v1.18.1
+- [helm](https://helm.sh/docs/intro/install/)  v2.14.2
 
-#### helm, ingress, dns
-if you dont have helm installed, have a look how to [get it](https://helm.sh/docs/intro/install/)
-
-start the local cluster and enable the following addons
+### get started
 ```bash
-minikube start
-# minikube addons enable ingress
-minikube addons enable ingress-dns
-minikube addons enable helm-tiller
-
-helm init --wait --upgrade
+make
+make minikube-start
+make minikube-addons-enabled
 ```
-append the following command output in your `/etc/hosts`
+
+append the following command's output in your `/etc/hosts`
 ```bash
 echo $(minikube ip) minikube
 ```
@@ -28,24 +23,21 @@ e.g:
 192.168.64.2 minikube
 ```
 
-#### local registry
-run the following command to set docker registry context to minikube's VM allowing it to pull the images produced by docker-compose
-```bash
-eval $(minikube docker-env)
-```
-
 #### build
-build all artifacts by running:
+run the following command to get all project images ready to be used at your registry
 ```bash
-docker-compose build
+make artifacts-build
 ```
-
-#### running at kubernetes
-once every image above is successfully built, you might follow [this](https://github.com/devbytom/hurb/tree/master/kubernetes) in order to install the application charts in their wishful namespaces
 
 #### running at docker
 since we are running mysql inside a container, I'll just assume its data might be ephemeral as well;
 to have mysql listening at port 3306 along with nodejs server at 3000, run:
 ```bash
-docker-compose up
+make run
+make list-packages
+make add-package text=myfirstpackage
+#make rm-package id=1
 ```
+
+#### running at kubernetes
+once every image artifact is successfully built, you might follow [this](https://github.com/devbytom/hurb/tree/master/kubernetes) in order to install the application charts
