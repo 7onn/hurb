@@ -41,6 +41,7 @@ artifacts:
 run:
 	@eval $(minikube docker-env -u)
 	@docker-compose up -d
+	@sleep 10
 	@docker ps
 
 stop:
