@@ -14,6 +14,8 @@ help:
 	@echo "  - add-package [text=]"
 	@echo "  - rm-package [id=]"
 	@echo
+	@echo "  - print-logs (print stdout and stderr from ingress container)"
+	@echo
 
 minikube-start:
 	@minikube start
@@ -37,6 +39,7 @@ artifacts-build:
 	@docker-compose build --no-cache
 
 run:
+	@eval $(minikube docker-env -u)
 	@docker-compose up -d
 	@docker ps
 
@@ -62,3 +65,6 @@ else
 	@echo 'parameter id not defined'
 	@echo 'e.g: make rm-package id=ID'
 endif
+
+print-logs:
+	@docker logs $(shell docker ps | grep package-ingress | awk '{print $$1}')

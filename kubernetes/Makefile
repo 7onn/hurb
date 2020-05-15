@@ -3,8 +3,8 @@ default: help
 help:
 	@echo 
 	@echo "available commands"
-	@echo "  - add-namespaces"
-	@echo "  - rm-namespaces"
+	@echo "  - add-namespace"
+	@echo "  - rm-namespace"
 	@echo "  - add-database"
 	@echo "  - rm-database"
 	@echo "  - add-server"
@@ -12,11 +12,19 @@ help:
 	@echo "  - add-ingress (i.e: reverse proxy)" 
 	@echo "  - rm-ingress (i.e: reverse proxy)"
 	@echo
+	@echo "  - add-production (i.e: install namespace and charts)"
+	@echo "  - rm-production (i.e: remove production namespace and it's content)"
+	@echo
+	@echo "  - list-packages"
+	@echo "  - add-package [text=]"
+	@echo "  - rm-package [id=]"
+	@echo
+	@echo "note: you might use add scripts to update charts here"
 
-add-namespaces:
+add-namespace:
 	@kubectl create ns production
 
-rm-namespaces:
+rm-namespace:
 	@kubectl delete ns production
 
 add-database:
@@ -45,3 +53,31 @@ add-ingress:
 
 rm-ingress:
 	@helm del --purge package-ingress-production
+
+.PHONY: add-production
+add-production: add-namespace add-database add-server add-ingress
+
+.PHONY: rm-production
+rm-production: rm-ingress rm-server rm-database rm-namespace
+
+print-logs:
+	@kubectl -n production logs
+
+list-packages:
+	@curl -L minikube:32080/packages
+
+add-package:
+ifdef text
+	@curl -L -X POST minikube:32080/packages -d $(text)
+else
+	@echo 'parameter text is not defined'
+	@echo 'e.g: make add-package text=DESCRIPTION'
+endif
+
+rm-package:
+ifdef id
+	@curl -L -X DELETE minikube:32080/packages/$(id)
+else
+	@echo 'parameter id not defined'
+	@echo 'e.g: make rm-package id=ID'
+endif
