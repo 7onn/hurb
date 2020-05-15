@@ -12,14 +12,14 @@ help:
 	@echo "  - add-ingress (i.e: reverse proxy)" 
 	@echo "  - rm-ingress (i.e: reverse proxy)"
 	@echo
-	@echo "  - add-production (i.e: install namespace and charts)"
+	@echo "  - add-production (i.e: install production namespace and charts)"
 	@echo "  - rm-production (i.e: remove production namespace and it's content)"
 	@echo
 	@echo "  - list-packages"
 	@echo "  - add-package [text=]"
 	@echo "  - rm-package [id=]"
 	@echo
-	@echo "note: you might use add scripts to update charts here"
+	@echo "note: you also might use add scripts to update charts"
 
 add-namespace:
 	@kubectl create ns production
