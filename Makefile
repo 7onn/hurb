@@ -7,7 +7,7 @@ help:
 	@echo "  - minikube-stop"
 	@echo "  - minikube-addons-enabled"
 	@echo "  - minikube-addons-disabled"
-	@echo "  - artifacts-build"
+	@echo "  - artifacts"
 	@echo "  - run"
 	@echo "  - stop"
 	@echo "  - list-packages"
@@ -35,7 +35,7 @@ minikube-addons-disabled:
 	@minikube addons disable ingress-dns
 	@minikube addons disable helm-tiller
 
-artifacts-build:
+artifacts:
 	@docker-compose build --no-cache
 
 run:
