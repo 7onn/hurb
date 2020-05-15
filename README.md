@@ -19,6 +19,7 @@ make
 ```bash
 make artifacts
 make run
+# make stop
 make list-packages
 make add-package text=myfirstpackage
 #make rm-package id=1
