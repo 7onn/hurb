@@ -17,8 +17,9 @@ make
 
 ### docker-compose
 ```bash
+# eval $(minikube docker-env -u) only needed if you have switched to minikube docker context
 make artifacts
-make run
+make run # 
 # make stop
 make list-packages
 make add-package text=myfirstpackage
@@ -29,6 +30,7 @@ make add-package text=myfirstpackage
 ```bash
 make minikube-start
 make minikube-addons-enabled
+eval $(minikube docker-env)
 make artifacts
 ```
 

@@ -20,13 +20,12 @@ help:
 minikube-start:
 	@minikube start
 	@kubectl config use-context minikube
-	@eval $(minikube docker-env)
 
 minikube-stop:
 	@minikube stop
-	@eval $(minikube docker-env -u)
 
-minikube-addons-enabled:
+PHONY: minikube-addons-enabled
+minikube-addons-enabled: minikube-addons-disabled
 	@minikube addons enable ingress-dns
 	@minikube addons enable helm-tiller
 	@helm init --wait --upgrade
@@ -39,7 +38,6 @@ artifacts:
 	@docker-compose build --no-cache
 
 run:
-	@eval $(minikube docker-env -u)
 	@docker-compose up -d
 	@sleep 10
 	@docker ps

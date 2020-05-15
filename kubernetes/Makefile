@@ -19,6 +19,8 @@ help:
 	@echo "  - add-package [text=]"
 	@echo "  - rm-package [id=]"
 	@echo
+	@echo "  - print-logs (print stdout and stderr from ingress container)"
+	@echo
 	@echo "note: you also might use add scripts to update charts"
 
 add-namespace:
@@ -56,12 +58,14 @@ rm-ingress:
 
 .PHONY: add-production
 add-production: add-namespace add-database add-server add-ingress
+	@sleep 10
+	@kubectl -n production get pods
 
 .PHONY: rm-production
 rm-production: rm-ingress rm-server rm-database rm-namespace
 
 print-logs:
-	@kubectl -n production logs
+	@kubectl -n production logs $(shell kubectl -n production get pods -o name | grep package-ingress | sed -e 's/pod\///g' | awk '{print $$1}')
 
 list-packages:
 	@curl -L minikube:32080/packages
