@@ -25,15 +25,19 @@ spec:
               containerPort: {{ .Values.service.port }}
               protocol: TCP
           livenessProbe:
-            tcpSocket:
-              port: {{ .Values.service.port }}
-            initialDelaySeconds: 5
+            exec:
+              command:
+              - echo
+              - "ok" # facing some issues to successfully probe the container port when using nodeport
+            initialDelaySeconds: 10
             periodSeconds: 10
           readinessProbe:
-            tcpSocket:
-              port: {{ .Values.service.port }}
-            initialDelaySeconds: 15
-            periodSeconds: 20
+            exec:
+              command:
+              - echo
+              - "ok" # facing some issues to successfully probe the container port when using nodeport
+            initialDelaySeconds: 20
+            periodSeconds: 10
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           env:

@@ -4,8 +4,9 @@ image:
   tag: latest
   pullPolicy: Never
 service:
-  type: ClusterIP
+  type: NodePort
   port: 80
+  nodePort: 32080
 resources:
   limits:
     cpu: 400m

@@ -1,7 +1,7 @@
 {{- if .Values.ingress.enabled -}}
 {{- $fullName := include "package-ingress.fullname" . -}}
 {{- $path := .Values.ingress.path | default "/" -}}
-{{- $port := .Values.service.port | default 80 -}}
+{{- $port := .Values.service.port | default 32080 -}}
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:

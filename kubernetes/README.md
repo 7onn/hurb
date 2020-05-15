@@ -4,8 +4,8 @@
 to firstly setup the cluster, run:
 ```bash
 make
-make add-namespaces
-#make rm-namespaces
+make add-namespace
+#make rm-namespace
 #"sudo rm -rf /" equivalent commented above
 ```
 
