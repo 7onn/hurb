@@ -1,5 +1,5 @@
 # hurb
-this project is meant to accomplish the [delta challenge](https://github.com/hurbcom/challenge-delta)
+this project is meant to accomplish the [delta challenge](https://github.com/hurbcom/challenge-delta); although i have no intention of working there hahaha
 
 #### my setup
 - [docker](https://www.docker.com/get-started) 19.03.5 (633a0ea)
